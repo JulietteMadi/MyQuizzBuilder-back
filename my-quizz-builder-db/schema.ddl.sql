@@ -1,0 +1,20 @@
+DROP TABLE IF EXISTS topics;
+DROP TABLE IF EXISTS guides;
+DROP TABLE IF EXISTS provide;
+
+CREATE TABLE guides (
+	url VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(100) UNIQUE NOT NULL,
+	image VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE topics (
+	topic_id SERIAL PRIMARY KEY,
+	name VARCHAR (100) UNIQUE NOT NULL
+);
+
+CREATE TABLE provide(
+	topic_id INTEGER REFERENCES topics(topic_id),
+	guide_id VARCHAR REFERENCES guides(url),
+	PRIMARY KEY(topic_id, guide_id)
+);
