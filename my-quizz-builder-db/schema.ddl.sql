@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS topics;
 DROP TABLE IF EXISTS guides;
 DROP TABLE IF EXISTS provide;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE guides (
 	url VARCHAR(255) PRIMARY KEY,
@@ -9,12 +10,18 @@ CREATE TABLE guides (
 );
 
 CREATE TABLE topics (
-	topic_id SERIAL PRIMARY KEY,
+	id SERIAL PRIMARY KEY,
 	name VARCHAR (100) UNIQUE NOT NULL
 );
 
 CREATE TABLE provide(
-	topic_id INTEGER REFERENCES topics(topic_id),
+	topic_id INTEGER REFERENCES topics(id),
 	guide_id VARCHAR REFERENCES guides(url),
 	PRIMARY KEY(topic_id, guide_id)
+);
+
+CREATE TABLE users(
+	email VARCHAR(255) PRIMARY KEY,
+	name VARCHAR(255) UNIQUE NOT NULL,
+	password VARCHAR(255) NOT NULL
 );

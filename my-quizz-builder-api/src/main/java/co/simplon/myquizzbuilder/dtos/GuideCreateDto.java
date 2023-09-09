@@ -2,18 +2,23 @@ package co.simplon.myquizzbuilder.dtos;
 
 import javax.validation.constraints.NotBlank;
 
-public class GuideCreate {
+import co.simplon.myquizzbuilder.customValidations.UniqueGuideName;
+import co.simplon.myquizzbuilder.customValidations.UniqueUrl;
+
+public class GuideCreateDto {
 
     @NotBlank
+    @UniqueGuideName
     private String name;
 
     @NotBlank
+    @UniqueUrl
     private String url;
 
     @NotBlank
     private String image;
 
-    public GuideCreate() {
+    public GuideCreateDto() {
 
     }
 

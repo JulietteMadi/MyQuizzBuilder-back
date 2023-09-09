@@ -1,17 +1,20 @@
 package co.simplon.myquizzbuilder.dtos;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-public class TopicCreate {
+import co.simplon.myquizzbuilder.customValidations.UniqueTopicName;
+
+public class TopicCreateDto {
 
     @NotBlank
+    @UniqueTopicName
     private String name;
 
     @NotEmpty
-    private ArrayList<GuideCreate> guides;
+    private List<GuideCreateDto> guides;
 
     public String getName() {
 	return name;
@@ -21,11 +24,11 @@ public class TopicCreate {
 	this.name = name;
     }
 
-    public ArrayList<GuideCreate> getGuides() {
+    public List<GuideCreateDto> getGuides() {
 	return guides;
     }
 
-    public void setGuides(ArrayList<GuideCreate> guides) {
+    public void setGuides(List<GuideCreateDto> guides) {
 	this.guides = guides;
     }
 

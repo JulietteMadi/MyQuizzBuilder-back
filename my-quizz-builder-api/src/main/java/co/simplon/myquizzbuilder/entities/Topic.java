@@ -18,7 +18,7 @@ public class Topic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long topic_id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,12 +27,12 @@ public class Topic {
     @JoinTable(name = "provide", joinColumns = @JoinColumn(name = "topic_id"), inverseJoinColumns = @JoinColumn(name = "guide_id"))
     private List<Guide> guides;
 
-    public Long getTopic_id() {
-	return topic_id;
+    public Long getId() {
+	return id;
     }
 
-    public void setTopic_id(Long topic_id) {
-	this.topic_id = topic_id;
+    public void setId(Long id) {
+	this.id = id;
     }
 
     public String getName() {
@@ -53,8 +53,8 @@ public class Topic {
 
     @Override
     public String toString() {
-	return "{topic_id=" + topic_id + ", name=" + name
-		+ ", guides=" + guides + "}";
+	return "{id=" + id + ", name=" + name + ", guides="
+		+ guides + "}";
     }
 
 }
