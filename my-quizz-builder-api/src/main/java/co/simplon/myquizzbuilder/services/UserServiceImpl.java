@@ -44,9 +44,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public TokenInfo signIn(CredentialsSignIn inputs) {
-	User candidate = users.findOneByEmailOrName(
-		inputs.getEmailOrUsername(),
+	User candidate = users.findOneByEmail(
 		inputs.getEmailOrUsername());
+	System.out
+		.println("email of candidate" + candidate);
+	if (candidate == null) {
+	    candidate = users.findOneByName(
+		    inputs.getEmailOrUsername());
+	}
 	if (candidate == null) {
 	    throw new BadCredentialsException(
 		    "Wrong credentials");

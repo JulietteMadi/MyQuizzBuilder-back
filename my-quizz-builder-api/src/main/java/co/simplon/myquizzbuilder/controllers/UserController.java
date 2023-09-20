@@ -30,13 +30,12 @@ public class UserController {
     }
 
     @PostMapping("/sign-in")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public TokenInfo signIn(
 	    @RequestBody CredentialsSignIn inputs) {
 	return userService.signIn(inputs);
     }
 
-    @GetMapping("test")
+    @GetMapping("/test")
     public String test() {
 	return "works";
     }

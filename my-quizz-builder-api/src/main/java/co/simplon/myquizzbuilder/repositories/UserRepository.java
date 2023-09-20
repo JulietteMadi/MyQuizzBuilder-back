@@ -7,9 +7,8 @@ import co.simplon.myquizzbuilder.entities.User;
 public interface UserRepository
 	extends JpaRepository<User, String> {
 
-    User findOneByEmailOrName(String tryEmail,
-	    String tryUsername);
-
     User findOneByEmail(String mail);
+
+    User findOneByName(String name);
 
 }
