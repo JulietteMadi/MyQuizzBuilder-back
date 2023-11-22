@@ -1,11 +1,15 @@
 package co.simplon.myquizzbuilder.services;
 
-import co.simplon.myquizzbuilder.dtos.CredentialsSignIn;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignUp;
-import co.simplon.myquizzbuilder.dtos.TokenInfo;
+import co.simplon.myquizzbuilder.dtos.CredentialsSignInDto;
+import co.simplon.myquizzbuilder.dtos.CredentialsSignUpDto;
+import co.simplon.myquizzbuilder.dtos.UserInfoDto;
 
 public interface UserService {
-    public void signUp(CredentialsSignUp credentials);
+    public void signUp(CredentialsSignUpDto credentials);
 
-    public TokenInfo signIn(CredentialsSignIn inputs);
+    public UserInfoDto signIn(CredentialsSignInDto inputs);
+
+    public boolean nameValueExists(String name);
+
+    public boolean emailValueExists(String email);
 }

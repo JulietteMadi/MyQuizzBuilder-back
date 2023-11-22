@@ -1,18 +1,14 @@
 package co.simplon.myquizzbuilder.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "guides")
-public class Guide {
+public class Guide extends AbstractEntity {
 
-    @Id
+    @Column(name = "url")
     private String url;
 
     @Column(name = "name")
@@ -20,9 +16,6 @@ public class Guide {
 
     @Column(name = "image")
     private String image;
-
-    @ManyToMany(mappedBy = "guides")
-    private List<Topic> topics;
 
     public String getUrl() {
 	return url;
@@ -48,17 +41,9 @@ public class Guide {
 	this.image = image;
     }
 
-    public List<Topic> getTopics() {
-	return topics;
-    }
-
-    public void setTopics(List<Topic> topics) {
-	this.topics = topics;
-    }
-
     @Override
     public String toString() {
 	return "{url=" + url + ", name=" + name + ", image="
-		+ image + ", topics=" + topics + "}";
+		+ image + "}";
     }
 }

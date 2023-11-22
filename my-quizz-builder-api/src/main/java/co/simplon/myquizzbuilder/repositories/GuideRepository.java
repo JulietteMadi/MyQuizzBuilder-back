@@ -19,4 +19,8 @@ public interface GuideRepository
 
     boolean existsByName(String string);
 
+    Guide findByUrl(String url);
+
+    Guide findById(Long id);
+
 }

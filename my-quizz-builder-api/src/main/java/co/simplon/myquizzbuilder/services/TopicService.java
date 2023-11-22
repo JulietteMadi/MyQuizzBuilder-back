@@ -2,16 +2,24 @@ package co.simplon.myquizzbuilder.services;
 
 import java.util.Collection;
 
-import co.simplon.myquizzbuilder.dtos.TopicDetailDto;
 import co.simplon.myquizzbuilder.dtos.TopicCreateDto;
-import co.simplon.myquizzbuilder.dtos.TopicForUpdateDto;
+import co.simplon.myquizzbuilder.dtos.TopicForListDto;
+import co.simplon.myquizzbuilder.dtos.TopicUpdateDto;
+import co.simplon.myquizzbuilder.dtos.TopicVueDto;
 
 public interface TopicService {
     void createTopic(TopicCreateDto inputs);
 
-    TopicDetailDto topicDetail(Long id);
+    void updateTopic(Long id, TopicUpdateDto inputs);
 
-    Collection<TopicForUpdateDto> getAll();
+    Collection<TopicForListDto> getAll();
 
     public boolean nameValueExists(String name);
+
+    public boolean nameValueExistsUpdate(String name,
+	    Long id);
+
+    void delete(Long id);
+
+    TopicVueDto topicVue(Long id);
 }

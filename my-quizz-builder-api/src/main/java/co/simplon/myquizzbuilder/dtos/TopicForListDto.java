@@ -1,6 +1,6 @@
 package co.simplon.myquizzbuilder.dtos;
 
-public interface TopicForUpdateDto {
+public interface TopicForListDto {
 
     Long getId();
 

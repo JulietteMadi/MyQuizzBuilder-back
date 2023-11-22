@@ -1,25 +1,21 @@
 package co.simplon.myquizzbuilder.dtos;
 
-import javax.validation.constraints.NotBlank;
+public class GuideItemDto {
 
-import co.simplon.myquizzbuilder.customValidations.UniqueGuideName;
-import co.simplon.myquizzbuilder.customValidations.UniqueUrl;
+    private Long id;
 
-public class GuideCreateDto {
-
-    @NotBlank
-    @UniqueGuideName
     private String name;
 
-    @NotBlank
-    @UniqueUrl
     private String url;
 
-    @NotBlank
     private String image;
 
-    public GuideCreateDto() {
+    public Long getId() {
+	return id;
+    }
 
+    public void setId(Long id) {
+	this.id = id;
     }
 
     public String getName() {
@@ -48,8 +44,8 @@ public class GuideCreateDto {
 
     @Override
     public String toString() {
-	return "{name=" + name + ", url=" + url + ", image="
-		+ image + "}";
+	return "{id=" + id + ", name=" + name + ", url="
+		+ url + ", image=" + image + "}";
     }
 
 }

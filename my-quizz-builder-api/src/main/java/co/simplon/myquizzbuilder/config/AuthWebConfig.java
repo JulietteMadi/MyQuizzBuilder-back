@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class AuthWebConfig implements WebMvcConfigurer {
 
     @Value("${auth-api.cors.allowedOrigins}")
@@ -29,7 +29,8 @@ public class AuthWebConfig implements WebMvcConfigurer {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http)
 	    throws Exception {
-	http.csrf().disable().authorizeRequests()
+	http.cors().and().csrf().disable()
+		.authorizeRequests()
 		.antMatchers("/sign-in", "/sign-up")
 		.permitAll().anyRequest().authenticated()
 		.and().oauth2ResourceServer().jwt();
@@ -61,6 +62,7 @@ public class AuthWebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
 	registry.addMapping("/**")
 		.allowedOrigins(allowedOrigins)
-		.allowedMethods("POST", "GET", "PATCH");
+		.allowedMethods("POST", "GET", "PATCH",
+			"PUT");
     }
 }

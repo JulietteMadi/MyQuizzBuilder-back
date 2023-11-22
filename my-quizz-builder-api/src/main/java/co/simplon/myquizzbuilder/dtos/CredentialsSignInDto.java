@@ -2,7 +2,7 @@ package co.simplon.myquizzbuilder.dtos;
 
 import javax.validation.constraints.NotBlank;
 
-public class CredentialsSignIn {
+public class CredentialsSignInDto {
 
     @NotBlank
     private String emailOrUsername;

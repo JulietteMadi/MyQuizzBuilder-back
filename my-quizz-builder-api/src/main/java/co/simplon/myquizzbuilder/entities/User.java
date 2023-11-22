@@ -1,15 +1,16 @@
 package co.simplon.myquizzbuilder.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User extends AbstractEntity {
 
-    @Id
+    @Column(name = "email")
     private String email;
 
     @Column(name = "name")
@@ -40,6 +41,23 @@ public class User {
 
     public void setPassword(String password) {
 	this.password = password;
+    }
+
+    @Override
+    public int hashCode() {
+	return Objects.hash(email);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	if (!(obj instanceof User)) {
+	    return false;
+	}
+	User other = (User) obj;
+	return Objects.equals(email, other.email);
     }
 
     @Override

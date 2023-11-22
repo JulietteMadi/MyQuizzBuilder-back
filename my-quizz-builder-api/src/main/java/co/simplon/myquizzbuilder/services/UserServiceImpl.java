@@ -5,9 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.simplon.myquizzbuilder.config.AuthHelper;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignIn;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignUp;
-import co.simplon.myquizzbuilder.dtos.TokenInfo;
+import co.simplon.myquizzbuilder.dtos.CredentialsSignInDto;
+import co.simplon.myquizzbuilder.dtos.CredentialsSignUpDto;
+import co.simplon.myquizzbuilder.dtos.UserInfoDto;
 import co.simplon.myquizzbuilder.entities.User;
 import co.simplon.myquizzbuilder.repositories.UserRepository;
 
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void signUp(CredentialsSignUp inputs) {
+    public void signUp(CredentialsSignUpDto inputs) {
 	String mail = inputs.getEmail();
 	User existingAccount = users.findOneByEmail(mail);
 	if (existingAccount != null) {
@@ -43,11 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public TokenInfo signIn(CredentialsSignIn inputs) {
+    public UserInfoDto signIn(CredentialsSignInDto inputs) {
 	User candidate = users.findOneByEmail(
 		inputs.getEmailOrUsername());
-	System.out
-		.println("email of candidate" + candidate);
 	if (candidate == null) {
 	    candidate = users.findOneByName(
 		    inputs.getEmailOrUsername());
@@ -63,10 +61,25 @@ public class UserServiceImpl implements UserService {
 	    throw new BadCredentialsException(
 		    "Wrong credentials");
 	}
-	TokenInfo tokenInfo = new TokenInfo();
+	UserInfoDto tokenInfo = new UserInfoDto();
 	String token = authHelper
 		.createJWT(candidate.getName());
 	tokenInfo.setToken(token);
+	tokenInfo.setUserName(candidate.getName());
+	tokenInfo.setUserEmail(candidate.getEmail());
 	return tokenInfo;
     }
+
+    @Override
+    public boolean nameValueExists(String name)
+	    throws UnsupportedOperationException {
+	return this.users.existsByName(name.toString());
+    }
+
+    @Override
+    public boolean emailValueExists(String email)
+	    throws UnsupportedOperationException {
+	return this.users.existsByEmail(email.toString());
+    }
+
 }
