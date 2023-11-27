@@ -4,8 +4,17 @@ DELETE FROM users;
 
 INSERT INTO guides
 	(name, url, image) VALUES
-	('Inclusion pour tous les travailleurs', 'https://majrh.fr/', 'Some image'), ('Dispositifs RH', 'https://lienrh.fr/', 'Some image'), ('Onboarding facile', 'https://noticerh.fr/', 'Some image');
+	('La définition du poste', 'https://majrh.fr/topics/definition-du-poste/', 'Some image'), 
+	('La rédaction de l''offre d''emploi', 'https://majrh.fr/topics/la-redaction-de-loffre-demploi/', 'Some image'), 
+	('Modèle d''offre d''emploi inclusive', 'https://majrh.fr/topics/modele-doffre-demploi-inclusive/', 'Some image'),
+	('La diffusion de l''offre d''emploi', 'https://majrh.fr/topics/la-diffusion-de-loffre-demploi/', 'Some image'),
+	('Selection des candidatures', 'https://majrh.fr/topics/selection-des-candidatures/', 'Some image'),
+	('Preparation de la rencontre', 'https://majrh.fr/topics/preparation-de-la-rencontre/', 'Some image'),
+	('Réponse aux candidats', 'https://majrh.fr/topics/reponse-aux-candidats-es/', 'Some image');
 
 
 INSERT INTO users (email, name, password) VALUES
-	('juliette.madinier@gmail.com', 'coucou', '$2a$12$YFtTh0SduMN.AL1NeFo7feRyPqMGrlvrwiJWixo0tfKbdB46jchzG');
+	('administrateur@mqb.com', 'admin', '$2a$12$YFtTh0SduMN.AL1NeFo7feRyPqMGrlvrwiJWixo0tfKbdB46jchzG');
+	
+	
+	
