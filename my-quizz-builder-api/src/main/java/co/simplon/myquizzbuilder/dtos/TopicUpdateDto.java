@@ -2,6 +2,7 @@ package co.simplon.myquizzbuilder.dtos;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,11 +17,12 @@ public class TopicUpdateDto {
     private Long id;
 
     @NotBlank
-    @Size(max = 100)
+    @Size(min = 3, max = 100)
     private String name;
 
     @NotEmpty
-    private List<GuideItemDto> guides;
+    @Size(min = 5, max = 50)
+    private List<@Valid GuideItemDto> guides;
 
     public Long getId() {
 	return id;

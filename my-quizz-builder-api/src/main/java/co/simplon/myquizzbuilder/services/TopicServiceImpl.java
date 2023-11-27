@@ -35,14 +35,13 @@ public class TopicServiceImpl implements TopicService {
 	this.guideServices = guideServices;
     }
 
-    @Transactional
     @Override
+    @Transactional
     public void createTopic(TopicCreateDto inputs) {
 	Topic entity = new Topic();
 	entity.setName(inputs.getName());
 	List<@Valid Guide> guidesArray = new ArrayList<>();
 	for (GuideItemDto guide : inputs.getGuides()) {
-	    System.out.println(guide);
 	    if (guide.getId() == null) {
 		guideServices.create(guide);
 		guidesArray.add(
@@ -60,17 +59,17 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public Collection<TopicForListDto> getAll() {
+	return topics.findAllProjectedBy();
+    };
+
+    @Override
     public TopicVueDto topicVue(Long id) {
 	TopicVueDto topic = topics
 		.findProjectedDetailById(id);
 	topic.getGuides().size();
 	return topic;
     }
-
-    @Override
-    public Collection<TopicForListDto> getAll() {
-	return topics.findAllProjectedBy();
-    };
 
     @Override
     @Transactional

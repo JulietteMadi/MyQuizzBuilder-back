@@ -23,4 +23,8 @@ public interface GuideRepository
 
     Guide findById(Long id);
 
+    boolean existsByUrlAndIdIsNot(String url, Long id);
+
+    boolean existsByNameAndIdIsNot(String name, Long id);
+
 }

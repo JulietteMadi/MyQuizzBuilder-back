@@ -16,4 +16,7 @@ public interface GuideService {
     public boolean urlValueExists(String url);
 
     public boolean nameValueExists(String name);
+
+    public boolean nameValueExistsUpdate(String url,
+	    Long id);
 }

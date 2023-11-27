@@ -16,10 +16,6 @@ import javax.validation.Payload;
 public @interface UniqueUpdateTopicName {
     String message() default "Un thème porte déjà ce nom";
 
-    // Long id();
-
-    // String name();
-
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};

@@ -1,5 +1,8 @@
 package co.simplon.myquizzbuilder.dtos;
 
+import co.simplon.myquizzbuilder.customValidations.UniqueGuide;
+
+@UniqueGuide
 public class GuideItemDto {
 
     private Long id;

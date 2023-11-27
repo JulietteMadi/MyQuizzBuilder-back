@@ -21,6 +21,7 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
+    @Transactional
     public void create(GuideItemDto inputs) {
 	Guide entity = new Guide();
 	entity.setName(inputs.getName());
@@ -30,6 +31,7 @@ public class GuideServiceImpl implements GuideService {
     }
 
     @Override
+    @Transactional
     public void updateGuide(GuideItemDto inputs) {
 	Guide entity = guides.findById(inputs.getId());
 	entity.setName(inputs.getName());
@@ -52,6 +54,12 @@ public class GuideServiceImpl implements GuideService {
     public boolean nameValueExists(String name)
 	    throws UnsupportedOperationException {
 	return this.guides.existsByName(name.toString());
+    }
+
+    @Override
+    public boolean nameValueExistsUpdate(String name,
+	    Long id) throws UnsupportedOperationException {
+	return guides.existsByNameAndIdIsNot(name, id);
     }
 
 }

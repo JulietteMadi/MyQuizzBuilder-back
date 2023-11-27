@@ -10,10 +10,10 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Documented
-@Constraint(validatedBy = UniqueUrlValidator.class)
-public @interface UniqueUrl {
+@Constraint(validatedBy = UniqueGuideValidator.class)
+public @interface UniqueGuide {
     String message() default "Une fiche pratique pointe déjà vers cette url";
 
     Class<?>[] groups() default {};
