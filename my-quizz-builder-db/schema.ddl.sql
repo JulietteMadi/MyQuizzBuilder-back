@@ -1,7 +1,17 @@
-DROP TABLE IF EXISTS topics;
+DROP TABLE IF EXISTS availableAnswers;
+DROP TABLE IF EXISTS questions;
+DROP TABLE IF EXISTS quizzes;
 DROP TABLE IF EXISTS provide;
+DROP TABLE IF EXISTS topics;
 DROP TABLE IF EXISTS guides;
 DROP TABLE IF EXISTS users;
+
+CREATE TABLE users(
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	name VARCHAR(255) UNIQUE NOT NULL,
+	password VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE guides (
 	id SERIAL PRIMARY KEY,
@@ -21,9 +31,38 @@ CREATE TABLE provide(
 	PRIMARY KEY(topic_id, guide_id)
 );
 
-CREATE TABLE users(
+CREATE TABLE quizzes(
 	id SERIAL PRIMARY KEY,
-	email VARCHAR(255) UNIQUE NOT NULL,
-	name VARCHAR(255) UNIQUE NOT NULL,
-	password VARCHAR(255) NOT NULL
+	name VARCHAR (255) UNIQUE NOT NULL,
+	image VARCHAR (255),
+	user_id INTEGER NOT NULL,
+	CONSTRAINT fk_user_id 
+		FOREIGN KEY (user_id) 
+		REFERENCES users(id) 
+);
+
+CREATE TABLE questions(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR (255) NOT NULL,
+	answer_description VARCHAR (1000) NOT NULL,
+	topic_id INTEGER NOT NULL,
+	quiz_id INTEGER NOT NULL,
+	CONSTRAINT fk_topic_id
+		FOREIGN KEY (topic_id)
+		REFERENCES topics(id),
+	CONSTRAINT fk_quiz_id
+		FOREIGN KEY (quiz_id)
+		REFERENCES quizzes(id)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE available_answers (
+	id serial PRIMARY KEY,
+	name VARCHAR (255) NOT NULL,
+	valid boolean NOT NULL,
+	question_id INTEGER NOT NULL,
+	CONSTRAINT fk_question_id
+		FOREIGN KEY (question_id)
+		REFERENCES questions(id)
+		ON DELETE CASCADE
 );
