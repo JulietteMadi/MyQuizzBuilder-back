@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.myquizzbuilder.dtos.CredentialsSignInDto;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignUpDto;
-import co.simplon.myquizzbuilder.dtos.UserInfoDto;
+import co.simplon.myquizzbuilder.dtos.user.CredentialsSignInDto;
+import co.simplon.myquizzbuilder.dtos.user.CredentialsSignUpDto;
+import co.simplon.myquizzbuilder.dtos.user.UserInfoDto;
 import co.simplon.myquizzbuilder.services.UserService;
 
 @RestController

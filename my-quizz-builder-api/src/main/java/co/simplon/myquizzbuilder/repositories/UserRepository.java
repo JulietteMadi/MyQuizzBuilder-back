@@ -2,14 +2,14 @@ package co.simplon.myquizzbuilder.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import co.simplon.myquizzbuilder.entities.User;
+import co.simplon.myquizzbuilder.entities.Manager;
 
 public interface UserRepository
-	extends JpaRepository<User, String> {
+	extends JpaRepository<Manager, String> {
 
-    User findOneByEmail(String mail);
+    Manager findOneByEmail(String mail);
 
-    User findOneByName(String name);
+    Manager findOneByName(String name);
 
     boolean existsByName(String string);
 

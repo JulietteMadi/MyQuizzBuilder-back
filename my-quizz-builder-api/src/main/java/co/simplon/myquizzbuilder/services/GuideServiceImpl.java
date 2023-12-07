@@ -5,8 +5,8 @@ import java.util.Collection;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.simplon.myquizzbuilder.dtos.GuideItemDto;
-import co.simplon.myquizzbuilder.dtos.GuideVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideItemDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideVueDto;
 import co.simplon.myquizzbuilder.entities.Guide;
 import co.simplon.myquizzbuilder.repositories.GuideRepository;
 

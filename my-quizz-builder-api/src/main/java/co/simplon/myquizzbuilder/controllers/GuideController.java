@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.myquizzbuilder.dtos.GuideVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideVueDto;
 import co.simplon.myquizzbuilder.services.GuideService;
 
 @RestController

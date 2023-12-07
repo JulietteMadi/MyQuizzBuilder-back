@@ -1,4 +1,4 @@
-package co.simplon.myquizzbuilder.dtos;
+package co.simplon.myquizzbuilder.dtos.topic;
 
 import java.util.List;
 

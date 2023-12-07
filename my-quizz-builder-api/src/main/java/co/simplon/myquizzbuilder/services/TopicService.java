@@ -2,10 +2,10 @@ package co.simplon.myquizzbuilder.services;
 
 import java.util.Collection;
 
-import co.simplon.myquizzbuilder.dtos.TopicCreateDto;
-import co.simplon.myquizzbuilder.dtos.TopicForListDto;
-import co.simplon.myquizzbuilder.dtos.TopicUpdateDto;
-import co.simplon.myquizzbuilder.dtos.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 
 public interface TopicService {
     void createTopic(TopicCreateDto inputs);

@@ -1,4 +1,4 @@
-package co.simplon.myquizzbuilder.dtos;
+package co.simplon.myquizzbuilder.dtos.user;
 
 import javax.validation.constraints.NotBlank;
 

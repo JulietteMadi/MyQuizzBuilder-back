@@ -1,4 +1,4 @@
-package co.simplon.myquizzbuilder.dtos;
+package co.simplon.myquizzbuilder.dtos.topic;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class TopicUpdateDto {
 
     @NotEmpty
     @Size(min = 5, max = 50)
-    private List<@Valid GuideItemDto> guides;
+    private List<co.simplon.myquizzbuilder.dtos.topic.GuideItemDto> guides;
 
     public Long getId() {
 	return id;

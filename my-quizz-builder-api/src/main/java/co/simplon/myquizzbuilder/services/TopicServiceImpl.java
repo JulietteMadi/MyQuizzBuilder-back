@@ -9,11 +9,11 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import co.simplon.myquizzbuilder.dtos.GuideItemDto;
-import co.simplon.myquizzbuilder.dtos.TopicCreateDto;
-import co.simplon.myquizzbuilder.dtos.TopicForListDto;
-import co.simplon.myquizzbuilder.dtos.TopicUpdateDto;
-import co.simplon.myquizzbuilder.dtos.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideItemDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.entities.Guide;
 import co.simplon.myquizzbuilder.entities.Topic;
 import co.simplon.myquizzbuilder.repositories.GuideRepository;

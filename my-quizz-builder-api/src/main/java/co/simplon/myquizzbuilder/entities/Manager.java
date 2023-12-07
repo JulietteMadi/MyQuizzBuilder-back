@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User extends AbstractEntity {
+public class Manager extends AbstractEntity {
 
     @Column(name = "email")
     private String email;
@@ -53,10 +53,10 @@ public class User extends AbstractEntity {
 	if (this == obj) {
 	    return true;
 	}
-	if (!(obj instanceof User)) {
+	if (!(obj instanceof Manager)) {
 	    return false;
 	}
-	User other = (User) obj;
+	Manager other = (Manager) obj;
 	return Objects.equals(email, other.email);
     }
 

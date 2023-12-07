@@ -4,8 +4,8 @@ import java.util.Collection;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import co.simplon.myquizzbuilder.dtos.TopicForListDto;
-import co.simplon.myquizzbuilder.dtos.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.entities.Topic;
 
 public interface TopicRepository

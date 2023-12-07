@@ -3,7 +3,7 @@ package co.simplon.myquizzbuilder.customValidations;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import co.simplon.myquizzbuilder.dtos.TopicUpdateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.services.TopicService;
 
 public class UniqueUpdateTopicNameValidator implements

@@ -1,4 +1,4 @@
-package co.simplon.myquizzbuilder.dtos;
+package co.simplon.myquizzbuilder.dtos.user;
 
 public class UserInfoDto {
 

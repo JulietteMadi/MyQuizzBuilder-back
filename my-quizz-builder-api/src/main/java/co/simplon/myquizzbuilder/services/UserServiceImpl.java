@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.simplon.myquizzbuilder.config.AuthHelper;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignInDto;
-import co.simplon.myquizzbuilder.dtos.CredentialsSignUpDto;
-import co.simplon.myquizzbuilder.dtos.UserInfoDto;
-import co.simplon.myquizzbuilder.entities.User;
+import co.simplon.myquizzbuilder.dtos.user.CredentialsSignInDto;
+import co.simplon.myquizzbuilder.dtos.user.CredentialsSignUpDto;
+import co.simplon.myquizzbuilder.dtos.user.UserInfoDto;
+import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.repositories.UserRepository;
 
 @Service
@@ -27,13 +27,13 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void signUp(CredentialsSignUpDto inputs) {
 	String mail = inputs.getEmail();
-	User existingAccount = users.findOneByEmail(mail);
+	Manager existingAccount = users.findOneByEmail(mail);
 	if (existingAccount != null) {
 	    throw new BadCredentialsException(
 		    "This email already exists");
 	}
 
-	User user = new User();
+	Manager user = new Manager();
 	String password = inputs.getPassword();
 	String hash = authHelper.encode(password);
 	user.setPassword(hash);
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoDto signIn(CredentialsSignInDto inputs) {
-	User candidate = users.findOneByEmail(
+	Manager candidate = users.findOneByEmail(
 		inputs.getEmailOrUsername());
 	if (candidate == null) {
 	    candidate = users.findOneByName(

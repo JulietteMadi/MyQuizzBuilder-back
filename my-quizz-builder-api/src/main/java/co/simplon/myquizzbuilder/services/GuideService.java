@@ -2,8 +2,8 @@ package co.simplon.myquizzbuilder.services;
 
 import java.util.Collection;
 
-import co.simplon.myquizzbuilder.dtos.GuideItemDto;
-import co.simplon.myquizzbuilder.dtos.GuideVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideItemDto;
+import co.simplon.myquizzbuilder.dtos.topic.GuideVueDto;
 
 public interface GuideService {
 

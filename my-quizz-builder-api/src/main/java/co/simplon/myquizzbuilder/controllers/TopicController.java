@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import co.simplon.myquizzbuilder.dtos.TopicCreateDto;
-import co.simplon.myquizzbuilder.dtos.TopicForListDto;
-import co.simplon.myquizzbuilder.dtos.TopicUpdateDto;
-import co.simplon.myquizzbuilder.dtos.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.services.TopicService;
 
 @CrossOrigin
