@@ -1,6 +1,6 @@
 package co.simplon.myquizzbuilder.dtos.user;
 
-import javax.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 
 public class CredentialsSignInDto {
 

@@ -1,13 +1,12 @@
 package co.simplon.myquizzbuilder.dtos.user;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.Length;
 
 import co.simplon.myquizzbuilder.customValidations.UniqueUserEmail;
 import co.simplon.myquizzbuilder.customValidations.UniqueUserName;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 public class CredentialsSignUpDto {
 

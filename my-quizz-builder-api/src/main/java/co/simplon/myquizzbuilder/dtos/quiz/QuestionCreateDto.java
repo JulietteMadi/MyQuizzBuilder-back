@@ -2,11 +2,11 @@ package co.simplon.myquizzbuilder.dtos.quiz;
 
 import java.util.List;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class QuestionCreateDto {
 
@@ -23,7 +23,7 @@ public class QuestionCreateDto {
     private List<@Valid AvailableAnswerCreateDto> answers;
 
     @NotNull
-    private Integer topicId;
+    private Long topicId;
 
     public String getName() {
 	return name;
@@ -51,11 +51,11 @@ public class QuestionCreateDto {
 	this.answers = answers;
     }
 
-    public Integer getTopicId() {
+    public Long getTopicId() {
 	return topicId;
     }
 
-    public void setTopicId(Integer topicId) {
+    public void setTopicId(Long topicId) {
 	this.topicId = topicId;
     }
 

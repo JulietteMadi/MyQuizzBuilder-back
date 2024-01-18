@@ -31,7 +31,7 @@ public class AuthWebConfig implements WebMvcConfigurer {
 	    throws Exception {
 	http.cors().and().csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/sign-in", "/sign-up")
+		.requestMatchers("/sign-in", "/sign-up")
 		.permitAll().anyRequest().authenticated()
 		.and().oauth2ResourceServer().jwt();
 	return http.build();
@@ -63,6 +63,6 @@ public class AuthWebConfig implements WebMvcConfigurer {
 	registry.addMapping("/**")
 		.allowedOrigins(allowedOrigins)
 		.allowedMethods("POST", "GET", "PATCH",
-			"PUT");
+			"PUT", "DELETE");
     }
 }

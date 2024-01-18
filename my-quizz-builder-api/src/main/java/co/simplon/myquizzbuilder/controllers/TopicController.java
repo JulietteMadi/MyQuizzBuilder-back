@@ -1,7 +1,5 @@
 package co.simplon.myquizzbuilder.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,6 +17,7 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.services.TopicService;
+import jakarta.validation.Valid;
 
 @CrossOrigin
 @RestController

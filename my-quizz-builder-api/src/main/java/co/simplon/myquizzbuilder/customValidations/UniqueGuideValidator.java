@@ -1,10 +1,9 @@
 package co.simplon.myquizzbuilder.customValidations;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
 import co.simplon.myquizzbuilder.dtos.topic.GuideItemDto;
 import co.simplon.myquizzbuilder.services.GuideService;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class UniqueGuideValidator implements
 	ConstraintValidator<UniqueGuide, GuideItemDto> {

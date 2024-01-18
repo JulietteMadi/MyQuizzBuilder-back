@@ -15,4 +15,6 @@ public interface UserRepository
 
     boolean existsByEmail(String string);
 
+    Manager getReferenceById(Long userId);
+
 }

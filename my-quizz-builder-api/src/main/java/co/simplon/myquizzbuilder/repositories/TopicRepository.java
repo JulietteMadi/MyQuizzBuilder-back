@@ -19,4 +19,6 @@ public interface TopicRepository
 
     boolean existsByNameAndIdIsNot(String name, Long id);
 
+    Topic getReferenceById(Integer topicId);
+
 }

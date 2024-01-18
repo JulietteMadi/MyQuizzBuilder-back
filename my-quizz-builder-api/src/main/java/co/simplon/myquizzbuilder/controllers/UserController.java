@@ -1,7 +1,5 @@
 package co.simplon.myquizzbuilder.controllers;
 
-import javax.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +10,7 @@ import co.simplon.myquizzbuilder.dtos.user.CredentialsSignInDto;
 import co.simplon.myquizzbuilder.dtos.user.CredentialsSignUpDto;
 import co.simplon.myquizzbuilder.dtos.user.UserInfoDto;
 import co.simplon.myquizzbuilder.services.UserService;
+import jakarta.validation.Valid;
 
 @RestController
 public class UserController {

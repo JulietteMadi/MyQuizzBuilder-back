@@ -7,4 +7,6 @@ import co.simplon.myquizzbuilder.entities.Question;
 public interface QuestionRepository
 	extends JpaRepository<Question, String> {
 
+    Question getReferenceById(Long questionId);
+
 }

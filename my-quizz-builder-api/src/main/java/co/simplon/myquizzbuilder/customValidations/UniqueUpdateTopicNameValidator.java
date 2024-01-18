@@ -1,10 +1,9 @@
 package co.simplon.myquizzbuilder.customValidations;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
-
 import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.services.TopicService;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class UniqueUpdateTopicNameValidator implements
 	ConstraintValidator<UniqueUpdateTopicName, TopicUpdateDto> {

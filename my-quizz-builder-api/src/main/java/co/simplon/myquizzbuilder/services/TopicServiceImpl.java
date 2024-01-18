@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +38,7 @@ public class TopicServiceImpl implements TopicService {
     public void createTopic(TopicCreateDto inputs) {
 	Topic entity = new Topic();
 	entity.setName(inputs.getName());
-	List<@Valid Guide> guidesArray = new ArrayList<>();
+	List<@jakarta.validation.Valid Guide> guidesArray = new ArrayList<>();
 	for (GuideItemDto guide : inputs.getGuides()) {
 	    if (guide.getId() == null) {
 		guideServices.create(guide);
@@ -67,7 +65,6 @@ public class TopicServiceImpl implements TopicService {
     public TopicVueDto topicVue(Long id) {
 	TopicVueDto topic = topics
 		.findProjectedDetailById(id);
-	topic.getGuides().size();
 	return topic;
     }
 
