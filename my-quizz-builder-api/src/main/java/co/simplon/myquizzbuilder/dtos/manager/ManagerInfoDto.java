@@ -1,12 +1,14 @@
-package co.simplon.myquizzbuilder.dtos.user;
+package co.simplon.myquizzbuilder.dtos.manager;
 
-public class UserInfoDto {
+public class ManagerInfoDto {
 
     private String token;
 
     private String userName;
 
     private String userEmail;
+
+    private Long id;
 
     public String getToken() {
 	return token;
@@ -32,10 +34,19 @@ public class UserInfoDto {
 	this.userEmail = userEmail;
     }
 
+    public Long getId() {
+	return id;
+    }
+
+    public void setId(Long id) {
+	this.id = id;
+    }
+
     @Override
     public String toString() {
 	return "{token=" + token + ", userName=" + userName
-		+ ", userEmail=" + userEmail + "}";
+		+ ", userEmail=" + userEmail + ", id=" + id
+		+ "}";
     }
 
 }

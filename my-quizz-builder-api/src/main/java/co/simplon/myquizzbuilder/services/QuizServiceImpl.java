@@ -1,13 +1,16 @@
 package co.simplon.myquizzbuilder.services;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.simplon.myquizzbuilder.dtos.quiz.QuestionCreateDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuestionVueDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
 import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.entities.Quiz;
@@ -54,9 +57,37 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public QuizVueDto quizVue(Long id) {
-	QuizVueDto quiz = quizzes.findProjectDetailById(id);
-	System.out.println(quiz);
+	Quiz entity = quizzes.getReferenceById(id);
+	QuizVueDto quiz = new QuizVueDto();
+	quiz.setId(id);
+	quiz.setImage(entity.getImage());
+	quiz.setName(entity.getName());
+	quiz.setUserName(entity.getManager().getName());
+	List<QuestionVueDto> questions = questionServices
+		.vueQuestion(id);
+	quiz.setQuestions(questions);
 	return quiz;
+    }
+
+    @Override
+    @Transactional
+    public void update(Long id, QuizUpdateDto inputs) {
+	Quiz entity = quizzes.findById(id).get();
+	entity.setName(inputs.name());
+	entity.setImage(inputs.image());
+	this.questionServices.delete(id);
+	for (QuestionCreateDto question : inputs
+		.questions()) {
+	    this.questionServices.create(question, id);
+	}
+	quizzes.save(entity);
+    }
+
+    @Override
+    public List<Long> quizIdsByManager(Long managerId) {
+	List<Long> quizIdsByManager = quizzes
+		.findAllByManager(managerId);
+	return quizIdsByManager;
     }
 
     @Override

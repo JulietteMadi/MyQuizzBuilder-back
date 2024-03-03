@@ -17,4 +17,6 @@ public interface UserRepository
 
     Manager getReferenceById(Long userId);
 
+    Manager findProjectedDetailById(Long id);
+
 }

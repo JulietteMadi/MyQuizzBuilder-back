@@ -65,6 +65,7 @@ public class TopicServiceImpl implements TopicService {
     public TopicVueDto topicVue(Long id) {
 	TopicVueDto topic = topics
 		.findProjectedDetailById(id);
+	System.out.println(topic);
 	return topic;
     }
 

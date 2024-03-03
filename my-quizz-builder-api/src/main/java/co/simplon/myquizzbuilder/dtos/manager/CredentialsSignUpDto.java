@@ -1,4 +1,4 @@
-package co.simplon.myquizzbuilder.dtos.user;
+package co.simplon.myquizzbuilder.dtos.manager;
 
 import org.hibernate.validator.constraints.Length;
 

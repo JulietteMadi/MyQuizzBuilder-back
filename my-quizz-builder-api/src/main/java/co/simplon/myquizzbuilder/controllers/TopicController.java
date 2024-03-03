@@ -35,6 +35,7 @@ public class TopicController {
     public void create(
 	    @RequestBody @Valid TopicCreateDto inputs) {
 	service.createTopic(inputs);
+
     }
 
     @GetMapping("/{id}")
