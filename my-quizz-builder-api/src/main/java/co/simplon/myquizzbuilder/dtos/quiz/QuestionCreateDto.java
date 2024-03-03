@@ -14,13 +14,16 @@ public class QuestionCreateDto {
     @Size(max = 255)
     private String name;
 
+    @NotNull
+    private Long questionIndex;
+
     @NotBlank
     @Size(max = 1000)
     private String answerDescription;
 
     @NotEmpty
     @Size(min = 2, max = 10)
-    private List<@Valid AvailableAnswerCreateDto> answers;
+    private List<@Valid AnswerCreateDto> answers;
 
     @NotNull
     private Long topicId;
@@ -33,6 +36,14 @@ public class QuestionCreateDto {
 	this.name = name;
     }
 
+    public Long getQuestionIndex() {
+	return questionIndex;
+    }
+
+    public void setQuestionIndex(Long questionIndex) {
+	this.questionIndex = questionIndex;
+    }
+
     public String getAnswerDescription() {
 	return answerDescription;
     }
@@ -42,12 +53,12 @@ public class QuestionCreateDto {
 	this.answerDescription = answerDescription;
     }
 
-    public List<AvailableAnswerCreateDto> getAnswers() {
+    public List<AnswerCreateDto> getAnswers() {
 	return answers;
     }
 
     public void setAnswers(
-	    List<AvailableAnswerCreateDto> answers) {
+	    List<AnswerCreateDto> answers) {
 	this.answers = answers;
     }
 
@@ -61,8 +72,10 @@ public class QuestionCreateDto {
 
     @Override
     public String toString() {
-	return "{name=" + name + ", answerDescription="
+	return "{name=" + name + ", questionIndex="
+		+ questionIndex + ", answerDescription="
 		+ answerDescription + ", answers=" + answers
 		+ ", topicId=" + topicId + "}";
     }
+
 }

@@ -1,8 +1,8 @@
 DROP TABLE IF EXISTS availableAnswers;
-DROP TABLE IF EXISTS questions;
-DROP TABLE IF EXISTS quizzes;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS quizzes CASCADE;
 DROP TABLE IF EXISTS provide;
-DROP TABLE IF EXISTS topics;
+DROP TABLE IF EXISTS topics CASCADE;
 DROP TABLE IF EXISTS guides;
 DROP TABLE IF EXISTS users;
 
@@ -45,6 +45,7 @@ CREATE TABLE questions(
 	id SERIAL PRIMARY KEY,
 	name VARCHAR (255) NOT NULL,
 	answer_description VARCHAR (1000) NOT NULL,
+	question_index INTEGER NOT NULL,
 	topic_id INTEGER NOT NULL,
 	quiz_id INTEGER NOT NULL,
 	CONSTRAINT fk_topic_id
@@ -60,6 +61,7 @@ CREATE TABLE available_answers (
 	id serial PRIMARY KEY,
 	name VARCHAR (255) NOT NULL,
 	valid boolean NOT NULL,
+	answer_index INTEGER NOT NULL,
 	question_id INTEGER NOT NULL,
 	CONSTRAINT fk_question_id
 		FOREIGN KEY (question_id)

@@ -1,13 +1,16 @@
 package co.simplon.myquizzbuilder.services;
 
+import java.util.List;
+
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import co.simplon.myquizzbuilder.config.AuthHelper;
-import co.simplon.myquizzbuilder.dtos.user.CredentialsSignInDto;
-import co.simplon.myquizzbuilder.dtos.user.CredentialsSignUpDto;
-import co.simplon.myquizzbuilder.dtos.user.UserInfoDto;
+import co.simplon.myquizzbuilder.dtos.manager.CredentialsSignInDto;
+import co.simplon.myquizzbuilder.dtos.manager.CredentialsSignUpDto;
+import co.simplon.myquizzbuilder.dtos.manager.ManagerInfoDto;
+import co.simplon.myquizzbuilder.dtos.manager.ManagerItemsVueDto;
 import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.repositories.UserRepository;
 
@@ -16,18 +19,21 @@ import co.simplon.myquizzbuilder.repositories.UserRepository;
 public class UserServiceImpl implements UserService {
     private final UserRepository users;
     private final AuthHelper authHelper;
+    private final QuizService quizzes;
 
     public UserServiceImpl(UserRepository users,
-	    AuthHelper authHelper) {
+	    AuthHelper authHelper, QuizService quizzes) {
 	this.users = users;
 	this.authHelper = authHelper;
+	this.quizzes = quizzes;
     }
 
     @Override
     @Transactional
     public void signUp(CredentialsSignUpDto inputs) {
 	String mail = inputs.getEmail();
-	Manager existingAccount = users.findOneByEmail(mail);
+	Manager existingAccount = users
+		.findOneByEmail(mail);
 	if (existingAccount != null) {
 	    throw new BadCredentialsException(
 		    "This email already exists");
@@ -43,7 +49,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfoDto signIn(CredentialsSignInDto inputs) {
+    public ManagerInfoDto signIn(
+	    CredentialsSignInDto inputs) {
 	Manager candidate = users.findOneByEmail(
 		inputs.getEmailOrUsername());
 	if (candidate == null) {
@@ -61,13 +68,23 @@ public class UserServiceImpl implements UserService {
 	    throw new BadCredentialsException(
 		    "Wrong credentials");
 	}
-	UserInfoDto tokenInfo = new UserInfoDto();
+	ManagerInfoDto tokenInfo = new ManagerInfoDto();
 	String token = authHelper
 		.createJWT(candidate.getName());
 	tokenInfo.setToken(token);
 	tokenInfo.setUserName(candidate.getName());
 	tokenInfo.setUserEmail(candidate.getEmail());
+	tokenInfo.setId(candidate.getId());
 	return tokenInfo;
+    }
+
+    @Override
+    public ManagerItemsVueDto getManagerItems(Long id) {
+	List<Long> quizIds = quizzes.quizIdsByManager(id);
+	ManagerItemsVueDto managerItems = new ManagerItemsVueDto();
+	managerItems.setQuizIds(quizIds);
+	System.out.println(managerItems);
+	return managerItems;
     }
 
     @Override

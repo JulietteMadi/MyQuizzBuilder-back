@@ -16,6 +16,9 @@ public class AvailableAnswer extends AbstractEntity {
     @Column(name = "valid")
     private Boolean valid;
 
+    @Column(name = "answer_index")
+    private Long answerIndex;
+
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
@@ -36,6 +39,14 @@ public class AvailableAnswer extends AbstractEntity {
 	this.valid = valid;
     }
 
+    public Long getAnswerIndex() {
+	return answerIndex;
+    }
+
+    public void setAnswerIndex(Long answerIndex) {
+	this.answerIndex = answerIndex;
+    }
+
     public Question getQuestion() {
 	return question;
     }
@@ -47,6 +58,8 @@ public class AvailableAnswer extends AbstractEntity {
     @Override
     public String toString() {
 	return "{name=" + name + ", valid=" + valid
+		+ ", answerIndex=" + answerIndex
 		+ ", question=" + question + "}";
     }
+
 }

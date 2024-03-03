@@ -12,6 +12,9 @@ public class Question extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "question_index")
+    private Long questionIndex;
+
     @Column(name = "answer_description")
     private String answerDescription;
 
@@ -29,6 +32,14 @@ public class Question extends AbstractEntity {
 
     public void setName(String name) {
 	this.name = name;
+    }
+
+    public Long getQuestionIndex() {
+	return questionIndex;
+    }
+
+    public void setQuestionIndex(Long questionIndex) {
+	this.questionIndex = questionIndex;
     }
 
     public String getAnswerDescription() {
@@ -58,8 +69,10 @@ public class Question extends AbstractEntity {
 
     @Override
     public String toString() {
-	return "{name=" + name + ", answerDescription="
+	return "{name=" + name + ", questionIndex="
+		+ questionIndex + ", answerDescription="
 		+ answerDescription + ", topic=" + topic
 		+ ", quiz=" + quiz + "}";
     }
+
 }

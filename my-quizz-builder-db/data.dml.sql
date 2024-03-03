@@ -32,7 +32,7 @@ INSERT INTO provide(topic_id, guide_id) VALUES
 	(3,2),(3,4),(3,5),(3,7),(3,1),
 	(4,6),(4,2),(4,5),(4,4),(4,1);
 
-INSERT INTO quizzes (name, image, user_id) VALUES
+/* INSERT INTO quizzes (name, image, user_id) VALUES
 	('Quiz pour les manager RSE en grand groupe', 'some image', 2);
 	
 INSERT INTO questions (name, answer_description, topic_id, quiz_id) VALUES
@@ -50,5 +50,4 @@ INSERT INTO available_answers (name, valid, question_id) VALUES
 	('Vrai', true, 2),
 	('Faux', false, 2),
 	('Vrai', false, 3),
-	('Faux', true, 3);
-	
+	('Faux', true, 3);*/
