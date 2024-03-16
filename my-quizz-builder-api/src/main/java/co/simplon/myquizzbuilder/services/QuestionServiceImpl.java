@@ -81,7 +81,6 @@ public class QuestionServiceImpl
 
     @Override
     public void delete(Long quizId) {
-	System.out.println(quizId);
 	questions.deleteInBulkByQuizId(quizId);
     }
 

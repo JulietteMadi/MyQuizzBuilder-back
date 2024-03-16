@@ -2,6 +2,8 @@ package co.simplon.myquizzbuilder.dtos.quiz;
 
 import java.util.List;
 
+import co.simplon.myquizzbuilder.customValidations.UniqueQuizName;
+import co.simplon.myquizzbuilder.customValidations.UserIdOfQuizExists;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -10,13 +12,15 @@ import jakarta.validation.constraints.Size;
 
 public class QuizCreateDto {
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 255)
+    @UniqueQuizName
     private String name;
 
     @NotBlank
     private String image;
 
     @NotNull
+    @UserIdOfQuizExists
     private Long userId;
 
     @NotEmpty

@@ -10,8 +10,10 @@ import co.simplon.myquizzbuilder.dtos.quiz.QuestionCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuestionVueDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
+import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.entities.Quiz;
 import co.simplon.myquizzbuilder.repositories.QuizRepository;
@@ -94,5 +96,24 @@ public class QuizServiceImpl implements QuizService {
     @Transactional
     public void delete(Long id) {
 	quizzes.deleteById(id);
+    }
+
+    public ResultQuizToReturnDto questionSubmit(
+	    QuizPlayedResultsDto results) {
+	ResultQuizToReturnDto resultToReturn = new ResultQuizToReturnDto(
+		null);
+	return resultToReturn;
+    }
+
+    @Override
+    public boolean nameValueExists(String name)
+	    throws UnsupportedOperationException {
+	return this.quizzes.existsByName(name.toString());
+    }
+
+    @Override
+    public boolean userIdValueExists(Long userId)
+	    throws UnsupportedOperationException {
+	return this.quizzes.existsByManagerId(userId);
     }
 }

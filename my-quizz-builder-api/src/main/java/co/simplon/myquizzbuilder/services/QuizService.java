@@ -20,4 +20,8 @@ public interface QuizService {
     public List<Long> quizIdsByManager(Long managerId);
 
     void update(Long id, QuizUpdateDto inputs);
+
+    public boolean nameValueExists(String name);
+
+    public boolean userIdValueExists(Long userId);
 }

@@ -12,6 +12,7 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicsRequestedDto;
 import co.simplon.myquizzbuilder.entities.Guide;
 import co.simplon.myquizzbuilder.entities.Topic;
 import co.simplon.myquizzbuilder.repositories.GuideRepository;
@@ -67,6 +68,16 @@ public class TopicServiceImpl implements TopicService {
 		.findProjectedDetailById(id);
 	System.out.println(topic);
 	return topic;
+    }
+
+    @Override
+    public List<TopicVueDto> getRequestedTopics(
+	    TopicsRequestedDto inputs) {
+	List<TopicVueDto> topics = new ArrayList<TopicVueDto>();
+	for (Long id : inputs.topicIds()) {
+	    topics.add(this.topicVue(id));
+	}
+	return topics;
     }
 
     @Override

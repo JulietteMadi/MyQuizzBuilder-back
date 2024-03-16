@@ -32,4 +32,8 @@ public interface QuizRepository
     @Query(value = "SELECT count(*) FROM Question q WHERE q.quiz.id = :quizId")
     Long numberOfQuestions(@Param("quizId") Long quizId);
 
+    boolean existsByName(String string);
+
+    boolean existsByManagerId(Long userId);
+
 }

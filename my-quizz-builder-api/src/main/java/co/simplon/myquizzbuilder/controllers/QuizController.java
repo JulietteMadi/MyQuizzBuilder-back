@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
 import co.simplon.myquizzbuilder.services.QuizService;
@@ -38,6 +39,7 @@ public class QuizController {
 
     @GetMapping("/{id}")
     public QuizVueDto quizVue(@PathVariable("id") Long id) {
+	System.out.println(service.quizVue(id));
 	return service.quizVue(id);
     }
 
@@ -57,5 +59,10 @@ public class QuizController {
     public void update(@PathVariable("id") Long id,
 	    @RequestBody QuizUpdateDto inputs) {
 	service.update(id, inputs);
+    }
+
+    public void questionSubmit(
+	    @RequestBody @Valid QuizPlayedResultsDto quizResults) {
+	// return null;
     }
 }

@@ -1,5 +1,8 @@
 package co.simplon.myquizzbuilder.controllers;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +19,7 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
+import co.simplon.myquizzbuilder.dtos.topic.TopicsRequestedDto;
 import co.simplon.myquizzbuilder.services.TopicService;
 import jakarta.validation.Valid;
 
@@ -52,9 +56,14 @@ public class TopicController {
     }
 
     @GetMapping
-    public java.util.Collection<TopicForListDto> getAll() {
+    public Collection<TopicForListDto> getAll() {
 	return service.getAll();
+    }
 
+    @PostMapping("/for-quiz")
+    public List<TopicVueDto> getRequestedTopics(
+	    @RequestBody TopicsRequestedDto inputs) {
+	return service.getRequestedTopics(inputs);
     }
 
     @DeleteMapping("/{id}")

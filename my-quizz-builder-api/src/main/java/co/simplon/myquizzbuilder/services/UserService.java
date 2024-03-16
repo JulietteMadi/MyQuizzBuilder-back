@@ -16,4 +16,5 @@ public interface UserService {
     public boolean nameValueExists(String name);
 
     public boolean emailValueExists(String email);
+
 }
