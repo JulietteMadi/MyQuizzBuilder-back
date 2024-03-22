@@ -1,7 +1,10 @@
 package co.simplon.myquizzbuilder.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -98,11 +101,56 @@ public class QuizServiceImpl implements QuizService {
 	quizzes.deleteById(id);
     }
 
+    @Override
     public ResultQuizToReturnDto questionSubmit(
 	    QuizPlayedResultsDto results) {
+	List<QuestionVueDto> questions = questionServices
+		.vueQuestion(results.quizId());
+	List<Long> topicsId = new ArrayList<Long>();
+	for (QuestionVueDto question : questions) {
+	    topicsId.add(question.getTopicId());
+	}
+	Map<Long, List<Boolean>> resultMap = resultsByTopicId(
+		results.answersResults(), topicsId);
+	int minScore = 100;
+	Long topicIdMinScore = null;
+	for (Map.Entry<Long, List<Boolean>> entry : resultMap
+		.entrySet()) {
+	    int score = score(entry.getValue());
+	    if (score < minScore) {
+		minScore = score;
+		topicIdMinScore = entry.getKey();
+	    }
+	}
+	int totalScore = score(results.answersResults());
 	ResultQuizToReturnDto resultToReturn = new ResultQuizToReturnDto(
-		null);
+		totalScore, topicIdMinScore);
 	return resultToReturn;
+    }
+
+    public static Map<Long, List<Boolean>> resultsByTopicId(
+	    List<Boolean> results, List<Long> topicIds) {
+	Map<Long, List<Boolean>> resultMap = new HashMap<>();
+	for (int i = 0; i < results.size(); i++) {
+	    Long topicId = topicIds.get(i);
+	    boolean result = results.get(i);
+	    resultMap.putIfAbsent(topicId,
+		    new ArrayList<>());
+	    resultMap.get(topicId).add(result);
+	}
+	return resultMap;
+    }
+
+    public static int score(List<Boolean> results) {
+	int score = 0;
+	for (Boolean result : results) {
+	    if (result) {
+		score++;
+	    }
+	}
+	double ratio = ((double) score / results.size())
+		* 100;
+	return (int) ratio;
     }
 
     @Override

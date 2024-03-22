@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
 	List<Long> quizIds = quizzes.quizIdsByManager(id);
 	ManagerItemsVueDto managerItems = new ManagerItemsVueDto();
 	managerItems.setQuizIds(quizIds);
-	System.out.println(managerItems);
+	// System.out.println(managerItems);
 	return managerItems;
     }
 

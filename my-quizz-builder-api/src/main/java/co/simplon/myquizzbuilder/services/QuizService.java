@@ -5,8 +5,10 @@ import java.util.List;
 
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
+import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 
 public interface QuizService {
     void create(QuizCreateDto inputs);
@@ -20,6 +22,9 @@ public interface QuizService {
     public List<Long> quizIdsByManager(Long managerId);
 
     void update(Long id, QuizUpdateDto inputs);
+
+    public ResultQuizToReturnDto questionSubmit(
+	    QuizPlayedResultsDto results);
 
     public boolean nameValueExists(String name);
 

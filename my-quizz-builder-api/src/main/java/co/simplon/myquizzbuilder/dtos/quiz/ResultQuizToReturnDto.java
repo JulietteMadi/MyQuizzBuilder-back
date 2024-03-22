@@ -1,5 +1,6 @@
 package co.simplon.myquizzbuilder.dtos.quiz;
 
-public record ResultQuizToReturnDto(Long percentage) {
+public record ResultQuizToReturnDto(int percentage,
+	Long topicId) {
 
 }

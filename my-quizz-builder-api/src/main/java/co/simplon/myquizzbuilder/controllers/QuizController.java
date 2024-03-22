@@ -18,6 +18,7 @@ import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
+import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 import co.simplon.myquizzbuilder.services.QuizService;
 import jakarta.validation.Valid;
 
@@ -61,8 +62,11 @@ public class QuizController {
 	service.update(id, inputs);
     }
 
-    public void questionSubmit(
+    @PostMapping("/play")
+    public ResultQuizToReturnDto questionSubmit(
 	    @RequestBody @Valid QuizPlayedResultsDto quizResults) {
-	// return null;
+	System.out.println(
+		service.questionSubmit(quizResults));
+	return service.questionSubmit(quizResults);
     }
 }
