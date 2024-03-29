@@ -12,9 +12,9 @@ import jakarta.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @Documented
-@Constraint(validatedBy = UserIdOfQuizExistsValidator.class)
-public @interface UserIdOfQuizExists {
-    String message() default "Ce user n'existe pas";
+@Constraint(validatedBy = AnswersListMatchQuizValidator.class)
+public @interface AnswersListMatchQuiz {
+    String message() default "Un autre quiz porte déjà ce nom";
 
     Class<?>[] groups() default {};
 

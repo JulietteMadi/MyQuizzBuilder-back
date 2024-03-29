@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS availableAnswers;
+DROP TABLE IF EXISTS available_answers CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS quizzes CASCADE;
 DROP TABLE IF EXISTS provide;
@@ -22,7 +22,11 @@ CREATE TABLE guides (
 
 CREATE TABLE topics (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR (100) UNIQUE NOT NULL
+	name VARCHAR (100) UNIQUE NOT NULL,
+	user_id INTEGER NOT NULL,
+	CONSTRAINT fk_user_id 
+		FOREIGN KEY (user_id) 
+		REFERENCES users(id) 
 );
 
 CREATE TABLE provide(

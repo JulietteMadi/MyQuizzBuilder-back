@@ -13,10 +13,10 @@ import co.simplon.myquizzbuilder.dtos.quiz.QuestionCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuestionVueDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
-import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
-import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.entities.Quiz;
 import co.simplon.myquizzbuilder.repositories.QuizRepository;
@@ -39,12 +39,11 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     @Transactional
-    public void create(QuizCreateDto inputs) {
+    public void create(QuizCreateDto inputs, Long userId) {
 	Quiz entity = new Quiz();
 	entity.setName(inputs.getName());
 	entity.setImage(inputs.getImage());
-	Manager manager = users
-		.getReferenceById(inputs.getUserId());
+	Manager manager = users.getReferenceById(userId);
 	entity.setManager(manager);
 	Quiz newQuiz = quizzes.save(entity);
 	Long quizId = newQuiz.getId();
@@ -102,16 +101,16 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public ResultQuizToReturnDto questionSubmit(
-	    QuizPlayedResultsDto results) {
+    public QuizResultsDto quizSubmit(
+	    QuizPlayDto quizAnswers, Long id) {
 	List<QuestionVueDto> questions = questionServices
-		.vueQuestion(results.quizId());
+		.vueQuestion(id);
 	List<Long> topicsId = new ArrayList<Long>();
 	for (QuestionVueDto question : questions) {
 	    topicsId.add(question.getTopicId());
 	}
 	Map<Long, List<Boolean>> resultMap = resultsByTopicId(
-		results.answersResults(), topicsId);
+		quizAnswers.answersResults(), topicsId);
 	int minScore = 100;
 	Long topicIdMinScore = null;
 	for (Map.Entry<Long, List<Boolean>> entry : resultMap
@@ -122,10 +121,11 @@ public class QuizServiceImpl implements QuizService {
 		topicIdMinScore = entry.getKey();
 	    }
 	}
-	int totalScore = score(results.answersResults());
-	ResultQuizToReturnDto resultToReturn = new ResultQuizToReturnDto(
+	int totalScore = score(
+		quizAnswers.answersResults());
+	QuizResultsDto results = new QuizResultsDto(
 		totalScore, topicIdMinScore);
-	return resultToReturn;
+	return results;
     }
 
     public static Map<Long, List<Boolean>> resultsByTopicId(
@@ -162,6 +162,24 @@ public class QuizServiceImpl implements QuizService {
     @Override
     public boolean userIdValueExists(Long userId)
 	    throws UnsupportedOperationException {
-	return this.quizzes.existsByManagerId(userId);
+	return this.quizzes
+		.managerExistsByManagerId(userId);
+    }
+
+    @Override
+    public boolean answersListMatchQuiz(
+	    List<Boolean> answers)
+	    throws UnsupportedOperationException {
+	List<QuestionVueDto> questions = questionServices
+		.vueQuestion((long) 1);
+	if (answers.size() != questions.size()) {
+	    return false;
+	}
+	for (Boolean answer : answers) {
+	    if (answer == null) {
+		return false;
+	    }
+	}
+	return true;
     }
 }

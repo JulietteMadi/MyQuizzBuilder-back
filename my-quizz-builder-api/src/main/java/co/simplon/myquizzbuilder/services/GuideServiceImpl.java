@@ -1,6 +1,7 @@
 package co.simplon.myquizzbuilder.services;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +34,9 @@ public class GuideServiceImpl implements GuideService {
     @Override
     @Transactional
     public void updateGuide(GuideItemDto inputs) {
-	Guide entity = guides.findById(inputs.getId());
+	Optional<Guide> optional = guides
+		.findById(inputs.getId());
+	Guide entity = optional.orElseThrow();
 	entity.setName(inputs.getName());
 	entity.setImage(inputs.getImage());
 	guides.save(entity);

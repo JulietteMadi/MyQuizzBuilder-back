@@ -10,7 +10,7 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicsRequestedDto;
 
 public interface TopicService {
-    void createTopic(TopicCreateDto inputs);
+    void createTopic(TopicCreateDto inputs, Long userId);
 
     void updateTopic(Long id, TopicUpdateDto inputs);
 
@@ -20,6 +20,8 @@ public interface TopicService {
 
     public boolean nameValueExistsUpdate(String name,
 	    Long id);
+
+    public List<Long> topicIdsByManager(Long managerId);
 
     void delete(Long id);
 

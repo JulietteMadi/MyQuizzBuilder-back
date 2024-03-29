@@ -20,11 +20,11 @@ INSERT INTO guides
 	('Preparation de la rencontre', 'https://majrh.fr/topics/preparation-de-la-rencontre/', 'Some image'),
 	('Reponse aux candidats', 'https://majrh.fr/topics/reponse-aux-candidats-es/', 'Some image');
 
-INSERT INTO topics (name) VALUES
-	('Onboarding'),
-	('Recrutement'),
-	('Dispositifs d''inclusion'),
-	('Formation interne');
+INSERT INTO topics (name, user_id) VALUES
+	('Onboarding', 1),
+	('Recrutement', 2),
+	('Dispositifs d''inclusion', 1),
+	('Formation interne', 2);
 
 INSERT INTO provide(topic_id, guide_id) VALUES
 	(1,1),(1,5),(1,4),(1,3),(1,2),

@@ -1,8 +1,10 @@
 package co.simplon.myquizzbuilder.controllers;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.simplon.myquizzbuilder.config.AuthHelper;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
-import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
-import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 import co.simplon.myquizzbuilder.services.QuizService;
 import jakarta.validation.Valid;
 
@@ -26,22 +29,35 @@ import jakarta.validation.Valid;
 @RequestMapping("/quizzes")
 public class QuizController {
     private final QuizService service;
+    private final AuthHelper authHelper;
 
-    public QuizController(QuizService service) {
+    public QuizController(QuizService service,
+	    AuthHelper authHelper) {
 	this.service = service;
+	this.authHelper = authHelper;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void create(
-	    @RequestBody @Valid QuizCreateDto inputs) {
-	service.create(inputs);
+	    @RequestBody @Valid QuizCreateDto inputs,
+	    JwtAuthenticationToken token) {
+	Map<String, Object> user = authHelper
+		.getPrincipalInfo(token);
+	Long userId = (Long) user.get("userId");
+	service.create(inputs, userId);
     }
 
     @GetMapping("/{id}")
     public QuizVueDto quizVue(@PathVariable("id") Long id) {
-	System.out.println(service.quizVue(id));
 	return service.quizVue(id);
+    }
+
+    @PostMapping("/{id}/play-quiz")
+    public QuizResultsDto quizSubmit(
+	    @RequestBody @Valid QuizPlayDto quizAnswers,
+	    @PathVariable("id") Long id) {
+	return service.quizSubmit(quizAnswers, id);
     }
 
     @GetMapping
@@ -60,13 +76,5 @@ public class QuizController {
     public void update(@PathVariable("id") Long id,
 	    @RequestBody QuizUpdateDto inputs) {
 	service.update(id, inputs);
-    }
-
-    @PostMapping("/play")
-    public ResultQuizToReturnDto questionSubmit(
-	    @RequestBody @Valid QuizPlayedResultsDto quizResults) {
-	System.out.println(
-		service.questionSubmit(quizResults));
-	return service.questionSubmit(quizResults);
     }
 }

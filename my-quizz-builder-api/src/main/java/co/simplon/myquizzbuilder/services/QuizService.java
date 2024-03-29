@@ -5,13 +5,13 @@ import java.util.List;
 
 import co.simplon.myquizzbuilder.dtos.quiz.QuizCreateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizForListDto;
-import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayedResultsDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizPlayDto;
+import co.simplon.myquizzbuilder.dtos.quiz.QuizResultsDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizUpdateDto;
 import co.simplon.myquizzbuilder.dtos.quiz.QuizVueDto;
-import co.simplon.myquizzbuilder.dtos.quiz.ResultQuizToReturnDto;
 
 public interface QuizService {
-    void create(QuizCreateDto inputs);
+    void create(QuizCreateDto inputs, Long userId);
 
     Collection<QuizForListDto> getAll();
 
@@ -23,10 +23,13 @@ public interface QuizService {
 
     void update(Long id, QuizUpdateDto inputs);
 
-    public ResultQuizToReturnDto questionSubmit(
-	    QuizPlayedResultsDto results);
+    public QuizResultsDto quizSubmit(QuizPlayDto answers,
+	    Long id);
 
     public boolean nameValueExists(String name);
 
     public boolean userIdValueExists(Long userId);
+
+    public boolean answersListMatchQuiz(
+	    List<Boolean> answers);
 }

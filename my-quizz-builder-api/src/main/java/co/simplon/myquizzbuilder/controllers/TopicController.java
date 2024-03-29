@@ -2,8 +2,10 @@ package co.simplon.myquizzbuilder.controllers;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.simplon.myquizzbuilder.config.AuthHelper;
 import co.simplon.myquizzbuilder.dtos.topic.TopicCreateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicForListDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
@@ -29,16 +32,23 @@ import jakarta.validation.Valid;
 public class TopicController {
 
     private final TopicService service;
+    private final AuthHelper authHelper;
 
-    public TopicController(TopicService service) {
+    public TopicController(TopicService service,
+	    AuthHelper authHelper) {
 	this.service = service;
+	this.authHelper = authHelper;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void create(
-	    @RequestBody @Valid TopicCreateDto inputs) {
-	service.createTopic(inputs);
+	    @RequestBody @Valid TopicCreateDto inputs,
+	    JwtAuthenticationToken token) {
+	Map<String, Object> user = authHelper
+		.getPrincipalInfo(token);
+	Long userId = (Long) user.get("userId");
+	service.createTopic(inputs, userId);
 
     }
 
@@ -60,15 +70,15 @@ public class TopicController {
 	return service.getAll();
     }
 
-    @PostMapping("/for-quiz")
-    public List<TopicVueDto> getRequestedTopics(
-	    @RequestBody TopicsRequestedDto inputs) {
-	return service.getRequestedTopics(inputs);
-    }
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id) {
 	service.delete(id);
+    }
+
+    @PostMapping("/play-quiz")
+    public List<TopicVueDto> getRequestedTopics(
+	    @RequestBody TopicsRequestedDto inputs) {
+	return service.getRequestedTopics(inputs);
     }
 }

@@ -34,6 +34,8 @@ public interface QuizRepository
 
     boolean existsByName(String string);
 
-    boolean existsByManagerId(Long userId);
+    @Query(value = "SELECT EXISTS(SELECT 1 FROM Manager WHERE id = :userId)")
+    boolean managerExistsByManagerId(
+	    @Param("userId") Long userId);
 
 }

@@ -14,9 +14,11 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicUpdateDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicVueDto;
 import co.simplon.myquizzbuilder.dtos.topic.TopicsRequestedDto;
 import co.simplon.myquizzbuilder.entities.Guide;
+import co.simplon.myquizzbuilder.entities.Manager;
 import co.simplon.myquizzbuilder.entities.Topic;
 import co.simplon.myquizzbuilder.repositories.GuideRepository;
 import co.simplon.myquizzbuilder.repositories.TopicRepository;
+import co.simplon.myquizzbuilder.repositories.UserRepository;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,21 +27,27 @@ public class TopicServiceImpl implements TopicService {
     private final TopicRepository topics;
     private final GuideService guideServices;
     private final GuideRepository guides;
+    private final UserRepository users;
 
     public TopicServiceImpl(TopicRepository topics,
 	    GuideRepository guides,
-	    GuideService guideServices) {
+	    GuideService guideServices,
+	    UserRepository users) {
 	this.topics = topics;
 	this.guides = guides;
 	this.guideServices = guideServices;
+	this.users = users;
     }
 
     @Override
     @Transactional
-    public void createTopic(TopicCreateDto inputs) {
+    public void createTopic(TopicCreateDto inputs,
+	    Long userId) {
 	Topic entity = new Topic();
 	entity.setName(inputs.getName());
-	List<@jakarta.validation.Valid Guide> guidesArray = new ArrayList<>();
+	Manager manager = users.getReferenceById(userId);
+	entity.setManager(manager);
+	List<Guide> guidesArray = new ArrayList<>();
 	for (GuideItemDto guide : inputs.getGuides()) {
 	    if (guide.getId() == null) {
 		guideServices.create(guide);
@@ -49,8 +57,9 @@ public class TopicServiceImpl implements TopicService {
 		if (guide.getName() != null) {
 		    guideServices.updateGuide(guide);
 		}
-		guidesArray.add(
-			guides.findById(guide.getId()));
+		guidesArray
+			.add(guides.findById(guide.getId())
+				.orElseThrow());
 	    }
 	}
 	entity.setGuides(guidesArray);
@@ -66,7 +75,7 @@ public class TopicServiceImpl implements TopicService {
     public TopicVueDto topicVue(Long id) {
 	TopicVueDto topic = topics
 		.findProjectedDetailById(id);
-	System.out.println(topic);
+	System.out.println(topic.getName());
 	return topic;
     }
 
@@ -96,12 +105,20 @@ public class TopicServiceImpl implements TopicService {
 		if (guide.getName() != null) {
 		    guideServices.updateGuide(guide);
 		}
-		guidesArray.add(
-			guides.findById(guide.getId()));
+		guidesArray
+			.add(guides.findById(guide.getId())
+				.orElseThrow());
 	    }
 	}
 	entity.setGuides(guidesArray);
 	topics.save(entity);
+    }
+
+    @Override
+    public List<Long> topicIdsByManager(Long managerId) {
+	List<Long> quizIdsByManager = topics
+		.findAllByManager(managerId);
+	return quizIdsByManager;
     }
 
     @Override

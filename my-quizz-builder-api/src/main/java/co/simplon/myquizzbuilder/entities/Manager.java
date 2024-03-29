@@ -44,26 +44,23 @@ public class Manager extends AbstractEntity {
     }
 
     @Override
-    public int hashCode() {
-	return Objects.hash(email);
-    }
-
-    @Override
     public boolean equals(Object obj) {
 	if (this == obj) {
 	    return true;
 	}
-	if (!(obj instanceof Manager)) {
-	    return false;
-	}
-	Manager other = (Manager) obj;
-	return Objects.equals(email, other.email);
+	return obj instanceof Manager other
+		&& Objects.equals(email, other.email);
     }
 
     @Override
+    public int hashCode() {
+	return Objects.hash(email);
+    }
+
+    // enlever le password de toString() !
+    @Override
     public String toString() {
-	return "{email=" + email + ", name=" + name
-		+ ", password=" + password + "}";
+	return "{email=" + email + ", name=" + name + "}";
     }
 
 }

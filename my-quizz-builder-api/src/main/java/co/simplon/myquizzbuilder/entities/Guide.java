@@ -1,5 +1,7 @@
 package co.simplon.myquizzbuilder.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -39,6 +41,20 @@ public class Guide extends AbstractEntity {
 
     public void setImage(String image) {
 	this.image = image;
+    }
+
+    @Override
+    public int hashCode() {
+	return Objects.hash(name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	return obj instanceof Guide other
+		&& Objects.equals(name, other.name);
     }
 
     @Override

@@ -6,6 +6,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -27,22 +29,33 @@ public class AuthWebConfig implements WebMvcConfigurer {
     private String secret;
 
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http)
-	    throws Exception {
-	http.cors().and().csrf().disable()
-		.authorizeRequests()
-		.requestMatchers("/sign-in", "/sign-up")
-		.permitAll().anyRequest().authenticated()
-		.and().oauth2ResourceServer().jwt();
+    public SecurityFilterChain filterChain(
+	    HttpSecurity http) throws Exception {
+	http.cors(Customizer.withDefaults())
+		.csrf(csrf -> csrf.disable())
+		.authorizeHttpRequests((authz) -> authz
+			.requestMatchers("/sign-in",
+				"/sign-up",
+				"quizzes/{id}/play-quiz",
+				"topics/play-quiz")
+			.permitAll()
+			.requestMatchers(HttpMethod.GET,
+				"quizzes/{id}")
+			.permitAll().anyRequest()
+			.authenticated())
+		.oauth2ResourceServer((
+			oauth2ResourceServer) -> oauth2ResourceServer
+				.jwt(Customizer
+					.withDefaults()));
 	return http.build();
     }
 
     @Bean
-    JwtAuthenticationConverter authetificationConverter() {
+    JwtAuthenticationConverter authentificationConverter() {
 	JwtGrantedAuthoritiesConverter autoritiesConverter = new JwtGrantedAuthoritiesConverter();
 	autoritiesConverter
 		.setAuthoritiesClaimName("roles");
-	autoritiesConverter.setAuthorityPrefix("");
+	autoritiesConverter.setAuthorityPrefix("ROLE_");
 	JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
 	authenticationConverter
 		.setJwtGrantedAuthoritiesConverter(

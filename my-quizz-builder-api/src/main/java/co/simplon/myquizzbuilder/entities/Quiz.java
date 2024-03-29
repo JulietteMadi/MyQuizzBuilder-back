@@ -1,5 +1,7 @@
 package co.simplon.myquizzbuilder.entities;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -41,6 +43,20 @@ public class Quiz extends AbstractEntity {
 
     public void setManager(Manager manager) {
 	this.manager = manager;
+    }
+
+    @Override
+    public int hashCode() {
+	return Objects.hash(name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj) {
+	    return true;
+	}
+	return obj instanceof Quiz other
+		&& Objects.equals(name, other.name);
     }
 
     @Override

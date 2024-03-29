@@ -26,11 +26,12 @@ public class TopicCreateDto {
 	this.name = name;
     }
 
-    public List<GuideItemDto> getGuides() {
+    public List<co.simplon.myquizzbuilder.dtos.topic.GuideItemDto> getGuides() {
 	return guides;
     }
 
-    public void setGuides(List<GuideItemDto> guides) {
+    public void setGuides(
+	    List<co.simplon.myquizzbuilder.dtos.topic.GuideItemDto> guides) {
 	this.guides = guides;
     }
 

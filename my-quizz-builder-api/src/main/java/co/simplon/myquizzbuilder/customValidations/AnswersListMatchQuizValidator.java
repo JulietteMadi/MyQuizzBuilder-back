@@ -1,24 +1,27 @@
 package co.simplon.myquizzbuilder.customValidations;
 
+import java.util.List;
+
 import co.simplon.myquizzbuilder.services.QuizService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class UserIdOfQuizExistsValidator implements
-	ConstraintValidator<UserIdOfQuizExists, Long> {
+public class AnswersListMatchQuizValidator implements
+	ConstraintValidator<AnswersListMatchQuiz, List<Boolean>> {
 
     private final QuizService service;
 
-    public UserIdOfQuizExistsValidator(
+    public AnswersListMatchQuizValidator(
 	    QuizService service) {
 	this.service = service;
     }
 
     @Override
-    public boolean isValid(Long userId,
+    public boolean isValid(List<Boolean> answers,
 	    ConstraintValidatorContext context) {
-	if (userId != null) {
-	    return this.service.userIdValueExists(userId);
+	if (answers != null) {
+	    return this.service
+		    .answersListMatchQuiz(answers);
 	}
 	return true;
     }

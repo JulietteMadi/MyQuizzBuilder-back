@@ -19,13 +19,16 @@ import co.simplon.myquizzbuilder.repositories.UserRepository;
 public class UserServiceImpl implements UserService {
     private final UserRepository users;
     private final AuthHelper authHelper;
-    private final QuizService quizzes;
+    private final QuizService quizServices;
+    private final TopicService topicServices;
 
     public UserServiceImpl(UserRepository users,
-	    AuthHelper authHelper, QuizService quizzes) {
+	    AuthHelper authHelper, QuizService quizServices,
+	    TopicService topicServices) {
 	this.users = users;
 	this.authHelper = authHelper;
-	this.quizzes = quizzes;
+	this.quizServices = quizServices;
+	this.topicServices = topicServices;
     }
 
     @Override
@@ -69,8 +72,8 @@ public class UserServiceImpl implements UserService {
 		    "Wrong credentials");
 	}
 	ManagerInfoDto tokenInfo = new ManagerInfoDto();
-	String token = authHelper
-		.createJWT(candidate.getName());
+	String token = authHelper.createJWT(
+		candidate.getName(), candidate.getId());
 	tokenInfo.setToken(token);
 	tokenInfo.setUserName(candidate.getName());
 	tokenInfo.setUserEmail(candidate.getEmail());
@@ -80,10 +83,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ManagerItemsVueDto getManagerItems(Long id) {
-	List<Long> quizIds = quizzes.quizIdsByManager(id);
+	List<Long> quizIds = quizServices
+		.quizIdsByManager(id);
+	List<Long> topicIds = topicServices
+		.topicIdsByManager(id);
 	ManagerItemsVueDto managerItems = new ManagerItemsVueDto();
 	managerItems.setQuizIds(quizIds);
-	// System.out.println(managerItems);
+	managerItems.setTopicIds(topicIds);
 	return managerItems;
     }
 

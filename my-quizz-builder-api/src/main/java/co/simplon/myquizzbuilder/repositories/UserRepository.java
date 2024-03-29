@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import co.simplon.myquizzbuilder.entities.Manager;
 
 public interface UserRepository
-	extends JpaRepository<Manager, String> {
+	extends JpaRepository<Manager, Long> {
 
     Manager findOneByEmail(String mail);
 
@@ -15,6 +15,7 @@ public interface UserRepository
 
     boolean existsByEmail(String string);
 
+    @Override
     Manager getReferenceById(Long userId);
 
     Manager findProjectedDetailById(Long id);
