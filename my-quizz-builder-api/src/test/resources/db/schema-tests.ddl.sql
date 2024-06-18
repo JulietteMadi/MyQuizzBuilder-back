@@ -1,0 +1,74 @@
+DROP TABLE IF EXISTS available_answers CASCADE;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS quizzes CASCADE;
+DROP TABLE IF EXISTS provide;
+DROP TABLE IF EXISTS topics CASCADE;
+DROP TABLE IF EXISTS guides;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users(
+	id SERIAL PRIMARY KEY,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	name VARCHAR(255) UNIQUE NOT NULL,
+	password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE guides (
+	id SERIAL PRIMARY KEY,
+	url VARCHAR(255) UNIQUE NOT NULL,
+	name VARCHAR(100) UNIQUE NOT NULL,
+	image VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE topics (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR (100) UNIQUE NOT NULL,
+	user_id INTEGER NOT NULL,
+	CONSTRAINT fk_user_id 
+		FOREIGN KEY (user_id) 
+		REFERENCES users(id) 
+);
+
+CREATE TABLE provide(
+	topic_id INTEGER REFERENCES topics(id),
+	guide_id INTEGER REFERENCES guides(id),
+	PRIMARY KEY(topic_id, guide_id)
+);
+
+CREATE TABLE quizzes(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR (255) UNIQUE NOT NULL,
+	image VARCHAR (255),
+	user_id INTEGER NOT NULL,
+	CONSTRAINT fk_user_id 
+		FOREIGN KEY (user_id) 
+		REFERENCES users(id) 
+);
+
+CREATE TABLE questions(
+	id SERIAL PRIMARY KEY,
+	name VARCHAR (255) NOT NULL,
+	answer_description VARCHAR (1000) NOT NULL,
+	question_index INTEGER NOT NULL,
+	topic_id INTEGER NOT NULL,
+	quiz_id INTEGER NOT NULL,
+	CONSTRAINT fk_topic_id
+		FOREIGN KEY (topic_id)
+		REFERENCES topics(id),
+	CONSTRAINT fk_quiz_id
+		FOREIGN KEY (quiz_id)
+		REFERENCES quizzes(id)
+		ON DELETE CASCADE
+);
+
+CREATE TABLE available_answers (
+	id serial PRIMARY KEY,
+	name VARCHAR (255) NOT NULL,
+	valid boolean NOT NULL,
+	answer_index INTEGER NOT NULL,
+	question_id INTEGER NOT NULL,
+	CONSTRAINT fk_question_id
+		FOREIGN KEY (question_id)
+		REFERENCES questions(id)
+		ON DELETE CASCADE
+);

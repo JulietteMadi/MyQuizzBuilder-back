@@ -48,16 +48,16 @@ public class QuizController {
 	service.create(inputs, userId);
     }
 
-    @GetMapping("/{id}")
-    public QuizVueDto quizVue(@PathVariable("id") Long id) {
-	return service.quizVue(id);
-    }
-
     @PostMapping("/{id}/play-quiz")
     public QuizResultsDto quizSubmit(
 	    @RequestBody @Valid QuizPlayDto quizAnswers,
 	    @PathVariable("id") Long id) {
-	return service.quizSubmit(quizAnswers, id);
+	return service.quizCorrect(quizAnswers, id);
+    }
+
+    @GetMapping("/{id}")
+    public QuizVueDto quizVue(@PathVariable("id") Long id) {
+	return service.quizVue(id);
     }
 
     @GetMapping

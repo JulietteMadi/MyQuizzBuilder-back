@@ -11,6 +11,8 @@ import com.auth0.jwt.algorithms.Algorithm;
 @Configuration
 public class SecurityConfig {
 
+    @Value("${auth-api.cors.enabled}")
+    private boolean corsEnabled;
     @Value("${mqb.auth.rounds}")
     private int rounds;
     @Value("${mqb.auth.issuer}")

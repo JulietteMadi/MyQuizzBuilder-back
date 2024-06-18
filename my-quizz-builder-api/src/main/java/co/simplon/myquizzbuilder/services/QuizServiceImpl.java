@@ -101,7 +101,7 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizResultsDto quizSubmit(
+    public QuizResultsDto quizCorrect(
 	    QuizPlayDto quizAnswers, Long id) {
 	List<QuestionVueDto> questions = questionServices
 		.vueQuestion(id);
@@ -110,7 +110,7 @@ public class QuizServiceImpl implements QuizService {
 	    topicsId.add(question.getTopicId());
 	}
 	Map<Long, List<Boolean>> resultMap = resultsByTopicId(
-		quizAnswers.answersResults(), topicsId);
+		quizAnswers.getAnswersResults(), topicsId);
 	int minScore = 100;
 	Long topicIdMinScore = null;
 	for (Map.Entry<Long, List<Boolean>> entry : resultMap
@@ -122,13 +122,13 @@ public class QuizServiceImpl implements QuizService {
 	    }
 	}
 	int totalScore = score(
-		quizAnswers.answersResults());
+		quizAnswers.getAnswersResults());
 	QuizResultsDto results = new QuizResultsDto(
 		totalScore, topicIdMinScore);
 	return results;
     }
 
-    public static Map<Long, List<Boolean>> resultsByTopicId(
+    private static Map<Long, List<Boolean>> resultsByTopicId(
 	    List<Boolean> results, List<Long> topicIds) {
 	Map<Long, List<Boolean>> resultMap = new HashMap<>();
 	for (int i = 0; i < results.size(); i++) {
@@ -141,7 +141,7 @@ public class QuizServiceImpl implements QuizService {
 	return resultMap;
     }
 
-    public static int score(List<Boolean> results) {
+    private static int score(List<Boolean> results) {
 	int score = 0;
 	for (Boolean result : results) {
 	    if (result) {
@@ -157,13 +157,6 @@ public class QuizServiceImpl implements QuizService {
     public boolean nameValueExists(String name)
 	    throws UnsupportedOperationException {
 	return this.quizzes.existsByName(name.toString());
-    }
-
-    @Override
-    public boolean userIdValueExists(Long userId)
-	    throws UnsupportedOperationException {
-	return this.quizzes
-		.managerExistsByManagerId(userId);
     }
 
     @Override

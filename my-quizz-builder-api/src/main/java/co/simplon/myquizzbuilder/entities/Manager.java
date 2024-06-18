@@ -57,7 +57,6 @@ public class Manager extends AbstractEntity {
 	return Objects.hash(email);
     }
 
-    // enlever le password de toString() !
     @Override
     public String toString() {
 	return "{email=" + email + ", name=" + name + "}";

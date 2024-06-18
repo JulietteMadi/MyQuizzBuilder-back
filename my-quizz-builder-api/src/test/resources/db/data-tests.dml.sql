@@ -25,35 +25,3 @@ INSERT INTO guides
 	('Former a la culture d''entreprise', 'https://majrh.fr/topics/former-culture-entreprise/', 'Some image'),
 	('Integrer a l''equipe', 'https://majrh.fr/topics/integrer-equipe/', 'Some image'),
 	('Former ses managers', 'https://majrh.fr/topics/former-manager/', 'Some image');
-
-INSERT INTO topics (name, user_id) VALUES
-	('Onboarding', 1),
-	('Recrutement', 2),
-	('Dispositifs d''inclusion', 1),
-	('Formation interne', 2);
-
-INSERT INTO provide(topic_id, guide_id) VALUES
-	(1,1),(1,5),(1,4),(1,3),(1,2),
-	(2,1),(2,7),(2,2),(2,3),(2,6),
-	(3,2),(3,4),(3,5),(3,7),(3,1),
-	(4,6),(4,2),(4,5),(4,4),(4,1);
-
-/* INSERT INTO quizzes (name, image, user_id) VALUES
-	('Quiz pour les manager RSE en grand groupe', 'some image', 2);
-	
-INSERT INTO questions (name, answer_description, topic_id, quiz_id) VALUES
-	('Lesquels sont des biais cognitif parmi la liste ci-dessous ?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 2, 1),
-	('Tout le monde a des biais cognitif', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 1, 1),
-	('A poste et temps de travail équivalent, les hommes et le femmes gagnent autant', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 2, 1),
-	('Pourquoi faut-il se former à l''inclusivité', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 4, 1),
-	('Que veut dire l''accronyme RSE ?', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 4, 1);
-
-INSERT INTO available_answers (name, valid, question_id) VALUES
-	('Biais du coup irrécupérable', true, 1),
-	('Biais de confirmation', true, 1),
-	('Biais de complémentarité réciproque', false, 1),
-	('Biais retrospectif', true, 1),
-	('Vrai', true, 2),
-	('Faux', false, 2),
-	('Vrai', false, 3),
-	('Faux', true, 3);*/

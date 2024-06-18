@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
@@ -69,13 +68,5 @@ public class AuthWebConfig implements WebMvcConfigurer {
 		secret.getBytes(), "Hmacsha256");
 	return NimbusJwtDecoder.withSecretKey(secretKey)
 		.build();
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-	registry.addMapping("/**")
-		.allowedOrigins(allowedOrigins)
-		.allowedMethods("POST", "GET", "PATCH",
-			"PUT", "DELETE");
     }
 }

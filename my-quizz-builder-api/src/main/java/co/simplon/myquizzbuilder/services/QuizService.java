@@ -23,12 +23,10 @@ public interface QuizService {
 
     void update(Long id, QuizUpdateDto inputs);
 
-    public QuizResultsDto quizSubmit(QuizPlayDto answers,
+    public QuizResultsDto quizCorrect(QuizPlayDto answers,
 	    Long id);
 
     public boolean nameValueExists(String name);
-
-    public boolean userIdValueExists(Long userId);
 
     public boolean answersListMatchQuiz(
 	    List<Boolean> answers);

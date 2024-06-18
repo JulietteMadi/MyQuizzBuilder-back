@@ -50,5 +50,4 @@ public class UserController {
 	Long userId = (Long) user.get("userId");
 	return userService.getManagerItems(userId);
     }
-
 }
