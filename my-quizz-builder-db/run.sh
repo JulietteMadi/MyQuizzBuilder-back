@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# ./run.sh elm_admin admin_DF46u9* localhost:5432 elm
-
 exit_code=0
 
 SCRIPT=$0
