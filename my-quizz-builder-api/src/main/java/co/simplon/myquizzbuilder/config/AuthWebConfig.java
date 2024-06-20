@@ -21,9 +21,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class AuthWebConfig implements WebMvcConfigurer {
 
-    @Value("${auth-api.cors.allowedOrigins}")
-    private String[] allowedOrigins;
-
     @Value("${mqb.auth.secret}")
     private String secret;
 
