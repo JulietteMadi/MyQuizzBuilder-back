@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +25,6 @@ import co.simplon.myquizzbuilder.dtos.topic.TopicsRequestedDto;
 import co.simplon.myquizzbuilder.services.TopicService;
 import jakarta.validation.Valid;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/topics")
 public class TopicController {
