@@ -6,23 +6,20 @@ import org.springframework.stereotype.Component;
 @Component
 class Tokens {
 
-    @Value("${skilltree.tests.fake-token}")
+    @Value("${mqb.tests.fake-token}")
     private String fake;
 
-    @Value("${skilltree.tests.bad-secret-token}")
+    @Value("${mqb.tests.bad-secret-token}")
     private String badSecret;
 
-    @Value("${skilltree.tests.bad-issuer-token}")
+    @Value("${mqb.tests.bad-issuer-token}")
     private String badIssuer;
 
-    @Value("${skilltree.tests.expired-token}")
+    @Value("${mqb.tests.expired-token}")
     private String expired;
 
-    @Value("${skilltree.tests.valid-admin-token}")
-    private String admin;
-
-    @Value("${skilltree.tests.valid-trainer-token}")
-    private String trainer;
+    @Value("${mqb.tests.valid-token}")
+    private String valid;
 
     String get(final String name) {
 	switch (name) {
@@ -34,10 +31,8 @@ class Tokens {
 	    return badIssuer;
 	case "expired":
 	    return expired;
-	case "admin":
-	    return admin;
-	case "trainer":
-	    return trainer;
+	case "validToken":
+	    return valid;
 	default:
 	    throw new IllegalArgumentException(
 		    "Unexpected value: " + name);

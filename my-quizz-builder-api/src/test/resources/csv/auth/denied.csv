@@ -1,1 +1,4 @@
-method§path§tokenName§expectedStatus
+GET§/guides§fake§401
+GET§/guides§badSecret§401
+GET§/guides§badIssuer§401
+GET§/guides§expired§401

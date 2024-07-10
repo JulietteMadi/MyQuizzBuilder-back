@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
@@ -17,12 +18,13 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles(value = "test")
+@ActiveProfiles(value = "devtests")
 @Sql(scripts = {
 	"classpath:db/schema-tests.ddl.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_CLASS)
+@Import(ControllerMock.class)
 class BaseMvcTests {
 
-    protected static final char DELIMITER = '$';
+    protected static final char DELIMITER = '§';
 
     protected static final int MAX_CHARS_PER_COLUMN = 8192;
 
@@ -46,7 +48,7 @@ class BaseMvcTests {
 	return mvc.perform(builder);
     }
 
-    private MockHttpServletRequestBuilder requestBuilder(
+    protected MockHttpServletRequestBuilder requestBuilder(
 	    String method, String path, String tokenName,
 	    String content) {
 	var builder = request(HttpMethod.valueOf(method),

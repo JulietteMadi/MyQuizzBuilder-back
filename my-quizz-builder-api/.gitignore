@@ -37,3 +37,4 @@ build/
 ### Properties ###
 application-dev.properties
 secret.properties
+secrets-tests.properties
